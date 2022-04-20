@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Axios from "axios";
+import AdressDetails from "./Components/AdressDetails";
 
-function App() {
+import "./App.css";
+
+const App = () => {
+  const [data, setdata] = useState([]);
+
+  useEffect(() => {
+    Axios.get("https://randomuser.me/api?results=25").then((response) => {
+      setdata(response.data.results);
+    });
+  }, []);
+
+  const handleClick = (button) => {
+    console.log(data);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header>Adress Book</header>
+      <button id="button" onClick={handleClick}>
+        Click
+      </button>
+      <ul>
+        {data.map((item) => (
+          <AdressDetails key={item.login.uuid} item={item} />
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default App;
