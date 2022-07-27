@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <header>Adress Book</header>
+      <header>Address Book</header>
       <button id="button" onClick={handleClick}>
         Click
       </button>
